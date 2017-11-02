@@ -1,0 +1,82 @@
+/*start search*/
+.search{
+	margin-bottom: 20px;
+}
+
+#sear{
+	width: 200px;
+	height: 25px;
+	float: left;
+	border: 1px solid #b6b6b6;
+	border-right: 0px;
+}
+
+#searbtn{
+	background:#2AAEFF;
+	float: left;
+	width: 40px;
+	height: 25px;
+	border: 0px;
+	color: white;
+	text-align: center;
+	font-family: "微软雅黑";
+}
+/*end search*/
+
+/*start nodetree*/
+li > ul{
+	margin-left: 20px;
+}
+
+.nav-down{
+	background-color: lightgray;
+	width: 450px;
+}
+
+.firnav{
+	display: block;
+}
+
+.delete{
+	background: url(img/icon_close_alt2.png);
+	display: block;
+	background-size:100%;
+	width: 20px;
+	height: 20px;
+	float: right;
+}
+
+.unfold{
+	background: url(img/down75.png);
+	display: block;
+	background-size: 100%;
+	width: 20px;
+	height: 20px;
+	float: right;
+}
+
+.fold{
+	background: url(img/down75.png);
+	display: block;
+	background-size: 100%;
+	width: 20px;
+	height: 20px;
+	float: right;
+	transform: rotate(180deg);
+}
+
+.addnode{
+	display: block;
+	width: 18px;
+	height: 18px;
+	background:url(img/1083130_135520425000_2.jpg);
+	background-size:100% ;
+	border: 1px dotted gray;
+	float: right;
+}
+
+.selected{
+	background-color: gray;
+	width: 450px;
+}
+/*end nodetree*/
