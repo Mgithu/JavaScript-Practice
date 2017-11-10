@@ -17,7 +17,7 @@ function named(){
 	else return name;
 }
 
-function creatFirElement(a){
+function creatFirElement(ele){
 	var firstnav=document.createElement("ul");
 	firstnav.setAttribute("class","firnav");
 	var onav=document.createElement("ul");
@@ -41,9 +41,9 @@ function creatFirElement(a){
 	listadd.setAttribute("class","addnode");
 	listadd.setAttribute("href","#");
 	listadd.setAttribute("onclick","createElements(this)");
-	var tree=document.getElementById("tree");
 	listname.innerHTML=named();
-	tree.insertBefore(firstnav,a);
+	var tree=document.getElementById("tree");
+	tree.insertBefore(firstnav,ele);
 	tree.childNodes[tree.childNodes.length-2].appendChild(navlist);
 	var trees=tree.childNodes[tree.childNodes.length-2];
 	trees.childNodes[0].appendChild(listname);
@@ -53,7 +53,7 @@ function creatFirElement(a){
 	trees.childNodes[0].appendChild(listadd);
 }
 
-function createElements(a){
+function createElements(ele){
 	var firstnav=document.createElement("ul");
 	firstnav.setAttribute("class","firnav");
 	var onav=document.createElement("ul");
@@ -77,7 +77,7 @@ function createElements(a){
 	listadd.setAttribute("class","addnode");
 	listadd.setAttribute("href","#");
 	listadd.setAttribute("onclick","createElements(this)");
-	var now=a;
+	var now=ele;
 	var par=now.parentNode;
 	listname.innerHTML=named();
 	par.appendChild(onav);
@@ -89,47 +89,67 @@ function createElements(a){
 	onav.childNodes[0].appendChild(listadd);
 }
 
-function deleteElements(a){
-	var par=a.parentNode;
+function deleteElements(ele){
+	var par=ele.parentNode;
 	var grapar=par.parentNode;
 	var grandpar=grapar.parentNode;
 	grapar.removeChild(par);
 	grandpar.removeChild(grapar);
 }
 
-function unfoldElements(a){
-	var par=a.parentNode;
+function unfoldElements(ele){
+	var par=ele.parentNode;
 	for(var i=5;i<par.childNodes.length;i++)
 	{
 		par.childNodes[i].style.display="block";
 	}
 }
 
-function foldElements(a){
-	var par=a.parentNode;
+function foldElements(ele){
+	var par=ele.parentNode;
 	for(var i=5;i<par.childNodes.length;i++)
 	{
 		par.childNodes[i].style.display="none";
 	}
 }
 
+function fold(ele){
+	if(ele.length!==undefined)
+	{
+		for(var i=0;i<ele.length;i++)
+		{
+			var note=ele[i].parentNode;
+			if(note.getAttribute("id")!=="tree")
+			{
+				note.style.display="block";
+				fold(note);
+			}
+		}
+	}
+	else
+	{
+		var note=ele.parentNode;
+		if(note.getAttribute("id")!=="tree")
+		{
+			note.style.display="block";
+			fold(note);
+		}
+	}
+}
+
 function searchElements(){
 	var word=document.getElementById("sear").value;
 	var searlist=document.getElementsByTagName("li");
-	alert(searlist.length);
 	for (var i=0,j=0;i<searlist.length;i++)
 	{
 		var name=searlist[i].childNodes[0].innerHTML;
-		var par=searlist[i].parentNode;
-		var grapar=par.parentNode;
 		if(name==word)
 		{
 			searlist[i].setAttribute("class","selected");
-			par.style.display="block";
-			for(var i=5;i<grapar.childNodes.length;i++)
-				grapar.childNodes[i].style.display="block";
 			j++;
 		}
 	}
+	var nodes=document.getElementsByClassName("selected");
+	fold(nodes);
 	if(j==0)	alert("节点不存在");
 }
